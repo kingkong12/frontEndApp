@@ -1,3 +1,3 @@
 export default {
-  primaryTextColor: 'red'
+  primaryTextColor: '#111111'
 }
