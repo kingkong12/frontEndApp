@@ -2,7 +2,7 @@
 const breaks = {
   large: '144opx',
   medium: '768px',
-  samll: '320px'
+  samll: '450px' // il cahge itot 320 later , 320 is too small to configure my emulator
 }
 
 const less = {

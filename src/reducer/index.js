@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
+import dashboardReducer from 'reducer/dashboardReducer'
 
-export default history =>
+export default (history) =>
   combineReducers({
-    router: connectRouter(history)
+    router: connectRouter(history),
+    list: dashboardReducer
     // rest of your reducers
   })

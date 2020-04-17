@@ -23,6 +23,7 @@ export default createGlobalStyle`
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     color: ${(props) => props.theme.primaryTextColor};
+    background-color: ${(props) => props.theme.bodyBackgroundColor};   
 }
   *{
       box-sizing: border-box;
