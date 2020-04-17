@@ -23,7 +23,7 @@ class Dasbaord extends Component {
         <Heading> Tracks of Coldplay </Heading>
         <CardContainer>
           {dashboardList.list.map((item, index) => (
-            <Card key={index} item={item} />
+            <Card key={item.trackId} item={item} />
           ))}
         </CardContainer>
       </Container>
