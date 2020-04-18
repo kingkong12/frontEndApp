@@ -9,6 +9,7 @@ import { push } from 'connected-react-router'
 
 class Dasbaord extends Component {
   componentDidMount() {
+    // compare previous and present propps to avoid rerendering of component
     const { updateReduxList } = this.props
     const api = 'https://itunes.apple.com/search?term=ColdPlay'
     axios
@@ -17,13 +18,15 @@ class Dasbaord extends Component {
       .catch((error) => console.log('error', error))
   }
 
-  myFucntion() {
-    this.props.push('/details')
+  myFucntion(id) {
+    this.props.push({
+      pathname: '/details',
+      state: { trackId: id }
+    })
   }
 
   render() {
     const { style, dashboardList } = this.props
-    console.log('actual props', this.props)
     return (
       <Container style={style}>
         <Heading> Tracks of Coldplay </Heading>
@@ -32,7 +35,7 @@ class Dasbaord extends Component {
             <Card
               key={item.trackId}
               item={item}
-              viewMoreFunction={() => this.myFucntion()}
+              viewMoreFunction={() => this.myFucntion(item.trackId)}
             />
           ))}
         </CardContainer>
