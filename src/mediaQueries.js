@@ -2,7 +2,7 @@
 const breaks = {
   large: '144opx',
   medium: '768px',
-  samll: '450px' // il cahge itot 320 later , 320 is too small to configure my emulator
+  samll: '320px'
 }
 
 const less = {
@@ -26,4 +26,4 @@ const between = {
   betweenLargeHuge: createBetween('Large', 'Huge')
 }
 
-export default { ...less, great, ...between }
+export default { ...less, ...great, ...between }

@@ -7,6 +7,9 @@ const colors = {
   static: {
     disabledText: '#767676',
     plainwhite: '#fff'
+  },
+  components: {
+    link: '#0a84ae'
   }
 }
 const bodyColors = {

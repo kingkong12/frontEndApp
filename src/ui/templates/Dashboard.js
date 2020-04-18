@@ -4,6 +4,8 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import udpateListItems from 'actions/dashboardAction'
 import Card from 'ui/organisms/Card'
+import propTypes from 'prop-types'
+import { push } from 'connected-react-router'
 
 class Dasbaord extends Component {
   componentDidMount() {
@@ -15,15 +17,23 @@ class Dasbaord extends Component {
       .catch((error) => console.log('error', error))
   }
 
+  myFucntion() {
+    this.props.push('/details')
+  }
+
   render() {
     const { style, dashboardList } = this.props
-    console.log('props', dashboardList.list)
+    console.log('actual props', this.props)
     return (
       <Container style={style}>
         <Heading> Tracks of Coldplay </Heading>
         <CardContainer>
-          {dashboardList.list.map((item, index) => (
-            <Card key={item.trackId} item={item} />
+          {dashboardList.list.map((item) => (
+            <Card
+              key={item.trackId}
+              item={item}
+              viewMoreFunction={() => this.myFucntion()}
+            />
           ))}
         </CardContainer>
       </Container>
@@ -31,15 +41,21 @@ class Dasbaord extends Component {
   }
 }
 
+Dasbaord.propTypes = {
+  updateReduxList: propTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => {
   return {
-    dashboardList: state.list
+    dashboardList: state.list,
+    router: state.router
   }
 }
 
-export default connect(mapStateToProps, { updateReduxList: udpateListItems })(
-  Dasbaord
-)
+export default connect(mapStateToProps, {
+  updateReduxList: udpateListItems,
+  push
+})(Dasbaord)
 const Container = styled.main`
   display: flex;
   flex-direction: column;

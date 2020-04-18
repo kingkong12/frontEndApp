@@ -1,11 +1,13 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import styled from 'styled-components'
 import query from 'mediaQueries'
+import propTypes from 'prop-types'
 
-const Card = ({ item, ...props }) => {
+const Card = ({ item, viewMoreFunction = () => {}, ...props }) => {
   const { artworkUrl100, trackName, collectionName, artistName } = item
   return (
-    <CardContainer>
+    <CardContainer {...props}>
       <ImgWrapper>
         <Image src={artworkUrl100} alt="" />
       </ImgWrapper>
@@ -13,12 +15,16 @@ const Card = ({ item, ...props }) => {
         <TrackTitle> {trackName}</TrackTitle>
         <TrackDescription> Album: {collectionName}</TrackDescription>
         <TrackDescription> Artist {artistName}</TrackDescription>
-        <LinkContainer>
-          <Link href="/">View More</Link>
+        <LinkContainer onClick={() => viewMoreFunction()}>
+          <Button>View More</Button>
         </LinkContainer>
       </DescriptionWrapper>
     </CardContainer>
   )
+}
+
+Card.propTypes = {
+  item: propTypes.instanceOf(Object)
 }
 
 export default Card
@@ -26,15 +32,15 @@ export default Card
 const LinkContainer = styled.div`
   display: flex;
   justify-content: center;
-
-  border-top: 1px solid rgb(208, 210, 211, 0.4);
+  border-top: 1px solid ${(props) => props.theme.branding.lightGray};
   margin: 1rem 1rem 0 1rem;
   padding: 1rem 0;
+  cursor: pointer;
 `
 
-const Link = styled.a`
+const Button = styled.div`
   text-align: center;
-  color: rgb(10, 132, 174);
+  color: ${(props) => props.theme.components.lik};
   text-decoration: none;
 `
 const CardContainer = styled.div`

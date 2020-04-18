@@ -6,23 +6,24 @@ import { ConnectedRouter } from 'connected-react-router'
 import { Route, Switch } from 'react-router'
 import GlobalStyles from 'globalStyles'
 import theme from 'theme'
-import configureStore, { history } from 'store'
+import configureStore, { makeHistory } from 'store'
 import * as serviceWorker from 'serviceWorker'
 import Dashboard from 'ui/templates/Dashboard'
+import Details from 'ui/templates/Details'
 
 const store = configureStore(/* provide initial state if any */)
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <ConnectedRouter history={makeHistory}>
         {/* place ConnectedRouter under Provider */}
         <GlobalStyles />
         {/* this is a good place to have fixed footers/heasders */}
         <Switch>
           {/* Renders the first child <Route> or <Redirect> that matches the location. */}
           <Route exact path="/" render={() => <Dashboard />} />
-          <Route render={() => <div>Miss</div>} />
+          <Route path="/details" render={() => <Details />} />
         </Switch>
       </ConnectedRouter>
     </Provider>
