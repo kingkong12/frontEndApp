@@ -18,7 +18,7 @@ class Dasbaord extends Component {
       .catch((error) => console.log('error', error))
   }
 
-  myFucntion(id) {
+  navigateUser(id) {
     this.props.push({
       pathname: '/details',
       state: { trackId: id }
@@ -30,15 +30,15 @@ class Dasbaord extends Component {
     return (
       <Container style={style}>
         <Heading> Tracks of Coldplay </Heading>
-        <CardContainer>
+        <CardWrapper>
           {dashboardList.list.map((item) => (
             <Card
               key={item.trackId}
               item={item}
-              viewMoreFunction={() => this.myFucntion(item.trackId)}
+              viewMoreFunction={() => this.navigateUser(item.trackId)}
             />
           ))}
-        </CardContainer>
+        </CardWrapper>
       </Container>
     )
   }
@@ -59,6 +59,7 @@ export default connect(mapStateToProps, {
   updateReduxList: udpateListItems,
   push
 })(Dasbaord)
+
 const Container = styled.main`
   display: flex;
   flex-direction: column;
@@ -75,7 +76,7 @@ const Heading = styled.div`
   box-shadow: 0px 1px 1px #888;
   background-color: ${(props) => props.theme.static.plainwhite};
 `
-const CardContainer = styled.div`
+const CardWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;

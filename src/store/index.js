@@ -6,7 +6,6 @@ import createRootReducer from 'reducer'
 export const makeHistory = createBrowserHistory()
 
 export default function configureStore(preloadedState) {
-  console.log('createBrowserHistory', createBrowserHistory)
   const store = createStore(
     createRootReducer(makeHistory), // root reducer with router state
     preloadedState,

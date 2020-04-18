@@ -10,7 +10,26 @@ const Details = (props) => {
   if (dashboardList.count === 0 || trackId === 0) push('/')
   const trackDetails =
     dashboardList.list.find((element) => element.trackId === trackId) || []
-
+  const renderTitleContent = [
+    {
+      title: '',
+      content: `${trackDetails.collectionName || ''}`
+    },
+    {
+      title: 'PRICE: ',
+      content: `${trackDetails.trackPrice || '00'}`
+    },
+    {
+      title: 'Album Price:',
+      content: `${trackDetails.collectionPrice || '00'} ${
+        trackDetails.currency || 'RS'
+      }`
+    },
+    {
+      title: 'Track on Album:',
+      content: `${trackDetails.trackNumber}/${trackDetails.trackCount}`
+    }
+  ]
   return (
     <DetailsConatainer>
       <ImageWrapper>
@@ -24,19 +43,11 @@ const Details = (props) => {
         <TableWrapper>
           <TrackTitle> {trackDetails.trackName || ''}</TrackTitle>
 
-          <Title> {trackDetails.collectionName || ''}</Title>
-
-          <Title> PRICE: {trackDetails.trackPrice || '00'}</Title>
-
-          <Title>
-            Album Price: {trackDetails.collectionPrice || '00'}
-            {trackDetails.currency || 'RS'}
-          </Title>
-
-          <Title>
-            Track on Album: {trackDetails.trackNumber}/{trackDetails.trackCount}
-          </Title>
-
+          {renderTitleContent.map((ary) => (
+            <Title key={ary.content}>
+              {ary.title} {ary.content}
+            </Title>
+          ))}
           <Button onClick={() => {}}>Buy - On Itunes</Button>
         </TableWrapper>
       </DescriptionWrapper>

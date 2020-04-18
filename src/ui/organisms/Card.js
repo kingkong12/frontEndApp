@@ -5,20 +5,17 @@ import query from 'mediaQueries'
 import propTypes from 'prop-types'
 
 const Card = ({ item, viewMoreFunction = () => {}, ...props }) => {
-  const { artworkUrl100, trackName, collectionName, artistName } = item
+  const { artworkUrl100, trackName, artistName } = item
   return (
     <CardContainer {...props}>
       <ImgWrapper>
         <Image src={artworkUrl100} alt="" />
       </ImgWrapper>
-      <DescriptionWrapper>
-        <TrackTitle> {trackName}</TrackTitle>
-        <TrackDescription> Album: {collectionName}</TrackDescription>
-        <TrackDescription> Artist {artistName}</TrackDescription>
-        <LinkContainer onClick={() => viewMoreFunction()}>
-          <Button>View More</Button>
-        </LinkContainer>
-      </DescriptionWrapper>
+      <TrackTitle> {trackName}</TrackTitle>
+      <TrackDescription> Artist {artistName}</TrackDescription>
+      <LinkContainer onClick={() => viewMoreFunction()}>
+        <Button>View More</Button>
+      </LinkContainer>
     </CardContainer>
   )
 }
@@ -72,7 +69,6 @@ const Image = styled.img`
   width: 100%;
   min-height: 100%;
 `
-const DescriptionWrapper = styled.div``
 
 const TrackTitle = styled.div`
   font-size: 1em;
