@@ -21,7 +21,8 @@ const Card = ({ item, viewMoreFunction = () => {}, ...props }) => {
 }
 
 Card.propTypes = {
-  item: propTypes.instanceOf(Object)
+  item: propTypes.instanceOf(Object),
+  viewMoreFunction: propTypes.func.isRequired
 }
 
 export default Card

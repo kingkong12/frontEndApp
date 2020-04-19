@@ -6,6 +6,7 @@ import {
   push as routerPush,
   goBack as routerGoBack
 } from 'connected-react-router'
+import propTypes from 'prop-types'
 
 const Details = (props) => {
   const { dashboardList, router, push, goBack } = props
@@ -65,6 +66,12 @@ const Details = (props) => {
       </DescriptionWrapper>
     </DetailsConatainer>
   )
+}
+
+Details.propTypes = {
+  push: propTypes.func.isRequired,
+  goBack: propTypes.func.isRequired,
+  dashboardList: propTypes.object
 }
 
 const mapStateToProps = (state) => {

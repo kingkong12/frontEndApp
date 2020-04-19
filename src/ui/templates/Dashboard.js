@@ -9,7 +9,6 @@ import { push } from 'connected-react-router'
 
 class Dasbaord extends Component {
   componentDidMount() {
-    // compare previous and present propps to avoid rerendering of component
     const { updateReduxList } = this.props
     const api = 'https://itunes.apple.com/search?term=ColdPlay'
     axios
@@ -19,16 +18,17 @@ class Dasbaord extends Component {
   }
 
   navigateUser(id) {
-    this.props.push({
+    const { push: routerPush } = this.props
+    routerPush({
       pathname: '/details',
       state: { trackId: id }
     })
   }
 
   render() {
-    const { style, dashboardList } = this.props
+    const { dashboardList } = this.props
     return (
-      <Container style={style}>
+      <Container>
         <Heading> Tracks of Coldplay </Heading>
         <CardWrapper>
           {dashboardList.list.map((item) => (
@@ -45,7 +45,9 @@ class Dasbaord extends Component {
 }
 
 Dasbaord.propTypes = {
-  updateReduxList: propTypes.func.isRequired
+  updateReduxList: propTypes.func.isRequired,
+  dashboardList: propTypes.object,
+  push: propTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
