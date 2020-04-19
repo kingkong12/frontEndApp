@@ -15,10 +15,18 @@ class Dasbaord extends Component {
   constructor() {
     super()
     this.state = {
-      currentPage: 2,
+      currentPage: 1,
       steps: 0,
       listArray: []
     }
+  }
+
+  updateArrayList = () => {
+    let lastindex = this.state.currentPage * recordPerPage || 0
+    let firstIndex = lastindex - recordPerPage || 0
+    let copyAry = this.props.dashboardList.list.slice(firstIndex, lastindex)
+    console.log('xcscscsc', lastindex, ' ', firstIndex, ' ', copyAry)
+    this.setState({ listArray: copyAry })
   }
 
   onSuccessFetch = (res) => {
@@ -49,11 +57,21 @@ class Dasbaord extends Component {
     })
   }
 
-  nav = (currentPage) => this.setState({ currentPage })
-  next = () => this.setState({ currentPage: this.state.currentPage + 1 })
-  last = () => this.setState({ currentPage: this.state.steps })
-  first = () => this.setState({ currentPage: 1 })
-  back = () => this.setState({ currentPage: this.state.currentPage - 1 })
+  nav = (currentPage) =>
+    this.setState({ currentPage }, () => this.updateArrayList())
+  next = () =>
+    this.setState({ currentPage: this.state.currentPage + 1 }, () =>
+      this.updateArrayList()
+    )
+  last = () =>
+    this.setState({ currentPage: this.state.steps }, () =>
+      this.updateArrayList()
+    )
+  first = () => this.setState({ currentPage: 1 }, () => this.updateArrayList())
+  back = () =>
+    this.setState({ currentPage: this.state.currentPage - 1 }, () =>
+      this.updateArrayList()
+    )
 
   renderEmptyCOntianer = () => {
     console.log('conatiner')
