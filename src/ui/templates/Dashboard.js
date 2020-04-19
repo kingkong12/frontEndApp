@@ -25,20 +25,14 @@ class Dasbaord extends Component {
     let lastindex = this.state.currentPage * recordPerPage || 0
     let firstIndex = lastindex - recordPerPage || 0
     let copyAry = this.props.dashboardList.list.slice(firstIndex, lastindex)
-    console.log('xcscscsc', lastindex, ' ', firstIndex, ' ', copyAry)
     this.setState({ listArray: copyAry })
   }
 
   onSuccessFetch = (res) => {
-    // conditoin whre record is less then 10
     const { updateReduxList } = this.props
-    let steps = res.data.resultCount / 10 || 1
-    let lastindex = this.state.currentPage * recordPerPage || 0
-    let firstIndex = lastindex - recordPerPage || 0
-    let listArray = res.data.results.slice(firstIndex, lastindex)
-    this.setState({ steps, listArray })
-    // redux dispatch
     updateReduxList(res.data)
+    let steps = res.data.resultCount / 10 || 1
+    this.setState({ steps }, () => this.updateArrayList())
   }
 
   componentDidMount() {
@@ -84,10 +78,8 @@ class Dasbaord extends Component {
   }
 
   render() {
-    const { currentPage, steps } = this.state
-    const { dashboardList } = this.props
+    const { steps } = this.state
 
-    console.log('props . . .', this.props)
     return (
       <Container>
         <Heading> Tracks of Coldplay </Heading>

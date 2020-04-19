@@ -189,4 +189,10 @@ const BackButton = styled.button`
   background-color: transparent;
   font-size: 1.4em;
   outline: none;
+
+  @media ${query.lessThanMedium} {
+    top: 13px;
+    left: 9px;
+    font-size: 1rem;
+  }
 `
