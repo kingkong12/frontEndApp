@@ -71,9 +71,9 @@ const Heading = styled.div`
   padding: 2rem;
   text-align: center;
   font-size: larger;
-  -webkit-box-shadow: 0px 1px 1px #888;
-  -moz-box-shadow: 0px 1px 1px #888;
-  box-shadow: 0px 1px 1px #888;
+  -webkit-box-shadow: 0px 1px 1px ${(props) => props.theme.static.shadow};
+  -moz-box-shadow: 0px 1px 1px ${(props) => props.theme.static.shadow};
+  box-shadow: 0px 1px 1px ${(props) => props.theme.static.shadow};
   background-color: ${(props) => props.theme.static.plainwhite};
 `
 const CardWrapper = styled.div`

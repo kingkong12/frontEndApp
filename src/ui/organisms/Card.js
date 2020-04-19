@@ -45,7 +45,7 @@ const CardContainer = styled.div`
   display: block;
   width: calc(100vw / 6);
   margin: 2rem;
-  background: #fff;
+  background: ${(props) => props.theme.static.plainwhite};
   border-radius: 0.25rem;
   transition: all 0.3s ease-in;
   font-size: 14px;

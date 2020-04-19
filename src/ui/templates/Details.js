@@ -2,14 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import query from 'mediaQueries'
-import { push as routerPush } from 'connected-react-router'
+import {
+  push as routerPush,
+  goBack as routerGoBack
+} from 'connected-react-router'
 
 const Details = (props) => {
-  const { dashboardList, router, push } = props
-  const { trackId = 0 } = router.location.state
+  const { dashboardList, router, push, goBack } = props
+
+  const { trackId } = router?.location?.state || 0
+
   if (dashboardList.count === 0 || trackId === 0) push('/')
   const trackDetails =
     dashboardList.list.find((element) => element.trackId === trackId) || []
+
   const renderTitleContent = [
     {
       title: '',
@@ -32,6 +38,7 @@ const Details = (props) => {
   ]
   return (
     <DetailsConatainer>
+      <BackButton onClick={() => goBack()}>Back</BackButton>
       <ImageWrapper>
         <Image
           src={trackDetails.artworkUrl100 || ''}
@@ -48,7 +55,12 @@ const Details = (props) => {
               {ary.title} {ary.content}
             </Title>
           ))}
-          <Button onClick={() => {}}>Buy - On Itunes</Button>
+
+          <Button
+            onClick={() => (window.location.href = trackDetails.trackViewUrl)}
+          >
+            Buy - On Itunes
+          </Button>
         </TableWrapper>
       </DescriptionWrapper>
     </DetailsConatainer>
@@ -62,7 +74,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { push: routerPush })(Details)
+export default connect(mapStateToProps, {
+  push: routerPush,
+  goBack: routerGoBack
+})(Details)
 
 const DetailsConatainer = styled.div`
   height: 100vh;
@@ -157,4 +172,14 @@ const Button = styled.button`
   font-size: 1rem;
   margin: 10px 0px;
   cursor: pointer;
+`
+const BackButton = styled.button`
+  position: absolute;
+  top: 36px;
+  left: 36px;
+  color: #0a84ae;
+  border: none;
+  background-color: transparent;
+  font-size: 1.4em;
+  outline: none;
 `
