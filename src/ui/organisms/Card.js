@@ -71,7 +71,7 @@ const CardContainer = styled.div`
 
 const ImgWrapper = styled.div`
   width: 100%;
-  height: 65%;
+  max-height: 65%;
   overflow: hidden;
 `
 
@@ -89,6 +89,9 @@ const TrackTitle = styled.div`
   max-height: 10%;
   color: rgb(33, 33, 33);
   padding-top: 10px;
+  @media ${query.betweenSmallMedium} {
+    padding-top: 5px;
+  }
 `
 const TrackDescription = styled.div`
   font-size: 14px;
