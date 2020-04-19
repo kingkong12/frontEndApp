@@ -1,8 +1,8 @@
 // Responsive Website using flex/Grid(Cover Responsable endpoints for 1440px,768px, 320px).
 const breaks = {
-  large: '144opx',
+  large: '1440px',
   medium: '768px',
-  samll: '320px'
+  small: '320px'
 }
 
 const less = {
@@ -22,8 +22,7 @@ const createBetween = (start, stop) =>
 
 const between = {
   betweenSmallMedium: createBetween('Small', 'Medium'),
-  betweenMediumLarge: createBetween('Medium', 'Large'),
-  betweenLargeHuge: createBetween('Large', 'Huge')
+  betweenMediumLarge: createBetween('Medium', 'Large')
 }
 
 export default { ...less, ...great, ...between }

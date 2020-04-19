@@ -33,6 +33,7 @@ const LinkContainer = styled.div`
   margin: 1rem 1rem 0 1rem;
   padding: 1rem 0;
   cursor: pointer;
+  max-height: 20%;
 `
 
 const Button = styled.div`
@@ -47,8 +48,18 @@ const CardContainer = styled.div`
   background: #fff;
   border-radius: 0.25rem;
   transition: all 0.3s ease-in;
+  font-size: 14px;
 
-  @media ${query.lessThanMedium} {
+  @media ${query.betweenMediumLarge} {
+    width: calc(100vw / 4);
+  }
+
+  @media ${query.betweenSmallMedium} {
+    width: calc(100vw / 3);
+    margin: 1rem;
+  }
+
+  @media ${query.lessThanSmall} {
     width: 100%;
   }
 
@@ -60,25 +71,24 @@ const CardContainer = styled.div`
 
 const ImgWrapper = styled.div`
   width: 100%;
-  height: 60%;
+  height: 65%;
   overflow: hidden;
 `
 
 const Image = styled.img`
   object-fit: cover;
   width: 100%;
-  min-height: 100%;
+  max-height: 100%;
 `
 
 const TrackTitle = styled.div`
   font-size: 1em;
   font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: normal;
   overflow-wrap: normal;
   text-align: center;
+  max-height: 10%;
   color: rgb(33, 33, 33);
-  padding: 0 1.5rem;
+  padding-top: 10px;
 `
 const TrackDescription = styled.div`
   font-size: 14px;
@@ -89,4 +99,5 @@ const TrackDescription = styled.div`
   text-align: center;
   color: rgb(117, 117, 117);
   padding: 0.55rem 1rem 0 1rem;
+  max-height: 10%;
 `
