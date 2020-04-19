@@ -2,17 +2,44 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import query from 'mediaQueries'
-import { push as routerPush } from 'connected-react-router'
+import {
+  push as routerPush,
+  goBack as routerGoBack
+} from 'connected-react-router'
+import propTypes from 'prop-types'
 
 const Details = (props) => {
-  const { dashboardList, router, push } = props
-  const { trackId = 0 } = router.location.state
+  const { dashboardList, router, push, goBack } = props
+
+  const { trackId } = router?.location?.state || 0
+
   if (dashboardList.count === 0 || trackId === 0) push('/')
   const trackDetails =
     dashboardList.list.find((element) => element.trackId === trackId) || []
 
+  const renderTitleContent = [
+    {
+      title: '',
+      content: `${trackDetails.collectionName || ''}`
+    },
+    {
+      title: 'PRICE: ',
+      content: `${trackDetails.trackPrice || '00'}`
+    },
+    {
+      title: 'Album Price:',
+      content: `${trackDetails.collectionPrice || '00'} ${
+        trackDetails.currency || 'RS'
+      }`
+    },
+    {
+      title: 'Track on Album:',
+      content: `${trackDetails.trackNumber}/${trackDetails.trackCount}`
+    }
+  ]
   return (
     <DetailsConatainer>
+      <BackButton onClick={() => goBack()}>Back</BackButton>
       <ImageWrapper>
         <Image
           src={trackDetails.artworkUrl100 || ''}
@@ -24,24 +51,27 @@ const Details = (props) => {
         <TableWrapper>
           <TrackTitle> {trackDetails.trackName || ''}</TrackTitle>
 
-          <Title> {trackDetails.collectionName || ''}</Title>
+          {renderTitleContent.map((ary) => (
+            <Title key={ary.content}>
+              {ary.title} {ary.content}
+            </Title>
+          ))}
 
-          <Title> PRICE: {trackDetails.trackPrice || '00'}</Title>
-
-          <Title>
-            Album Price: {trackDetails.collectionPrice || '00'}
-            {trackDetails.currency || 'RS'}
-          </Title>
-
-          <Title>
-            Track on Album: {trackDetails.trackNumber}/{trackDetails.trackCount}
-          </Title>
-
-          <Button onClick={() => {}}>Buy - On Itunes</Button>
+          <Button
+            onClick={() => (window.location.href = trackDetails.trackViewUrl)}
+          >
+            Buy - On Itunes
+          </Button>
         </TableWrapper>
       </DescriptionWrapper>
     </DetailsConatainer>
   )
+}
+
+Details.propTypes = {
+  push: propTypes.func.isRequired,
+  goBack: propTypes.func.isRequired,
+  dashboardList: propTypes.object
 }
 
 const mapStateToProps = (state) => {
@@ -51,7 +81,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { push: routerPush })(Details)
+export default connect(mapStateToProps, {
+  push: routerPush,
+  goBack: routerGoBack
+})(Details)
 
 const DetailsConatainer = styled.div`
   height: 100vh;
@@ -146,4 +179,20 @@ const Button = styled.button`
   font-size: 1rem;
   margin: 10px 0px;
   cursor: pointer;
+`
+const BackButton = styled.button`
+  position: absolute;
+  top: 36px;
+  left: 36px;
+  color: #0a84ae;
+  border: none;
+  background-color: transparent;
+  font-size: 1.4em;
+  outline: none;
+
+  @media ${query.lessThanMedium} {
+    top: 13px;
+    left: 9px;
+    font-size: 1rem;
+  }
 `

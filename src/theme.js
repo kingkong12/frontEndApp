@@ -2,11 +2,13 @@ const colors = {
   branding: {
     lightGray: '#E9EAEB',
     steelGray: '#94969A',
-    brick: '#E9EAEB'
+    brick: '#E9EAEB',
+    nero: '#252525'
   },
   static: {
     disabledText: '#767676',
-    plainwhite: '#fff'
+    plainwhite: '#fff',
+    shadow: '#888'
   },
   components: {
     link: '#0a84ae'

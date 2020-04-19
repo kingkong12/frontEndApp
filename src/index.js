@@ -11,7 +11,7 @@ import * as serviceWorker from 'serviceWorker'
 import Dashboard from 'ui/templates/Dashboard'
 import Details from 'ui/templates/Details'
 
-const store = configureStore(/* provide initial state if any */)
+const store = configureStore()
 
 const App = () => (
   <ThemeProvider theme={theme}>
